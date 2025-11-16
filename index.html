@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BudgetFit | Premium Macro & Cost Calculator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* CSS STYLES FOR PREMIUM AESTHETIC */
+
+        /* GLOBAL STYLES */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; 
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1280px; 
+            margin: 0 auto;
+            padding: 30px 0; 
+        }
+
+        /* COLORS & VARIABLES */
+        :root {
+            --color-primary-health: #1a295c; 
+            --color-secondary-finance: #e59a00; 
+            --color-text: #2c3e50;
+            --color-background: #ffffff;
+            --border-radius: 12px; 
+            --shadow-premium: 0 15px 40px rgba(0, 0, 0, 0.1); 
+            --color-placeholder: #aeb6c4; 
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--color-background);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .logo h1 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-primary-health);
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            font-weight: 700;
+        }
+
+        nav a {
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+            color: var(--color-text);
+            margin-left: 30px; 
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, .cta-link {
+            color: var(--color-secondary-finance);
+        }
+
+        /* BUTTONS */
+        .button {
+            display: inline-block;
+            padding: 10px 25px; 
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .button.primary {
+            background-color: var(--color-secondary-finance);
+            color: white;
+            box-shadow: 0 8px 15px rgba(229, 154, 0, 0.3);
+        }
+
+        .button.primary:hover {
+            background-color: #d18b00;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(229, 154, 0, 0.4);
+        }
+
+        .button.secondary {
+            background-color: #ecf0f1;
+            color: var(--color-text);
+            border: 1px solid #dcdcdc;
+            box-shadow: none;
+        }
+        
+        /* HERO SECTION */
+        #hero {
+            background: linear-gradient(135deg, var(--color-primary-health), #0f1c3f); 
+            color: white;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 20px;
+            padding: 50px 0; 
+            box-shadow: var(--shadow-premium);
+        }
+
+        .hero-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem; 
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* HOW IT WORKS SECTION */
+        #how-it-works h3 {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: var(--color-primary-health);
+            margin-bottom: 30px; 
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px; 
+        }
+
+        .step-card {
+            background-color: var(--color-background);
+            padding: 30px; 
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); 
+            text-align: center;
+            flex: 1;
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-card .icon {
+            /* UPDATED STYLES FOR LARGER CIRCULAR ICON */
+            background-color: var(--color-secondary-finance);
+            box-shadow: 0 4px 10px rgba(229, 154, 0, 0.4);
+            
+            /* Create the circular shape */
+            border-radius: 50%;
+            height: 45px;  
+            width: 45px;   
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px auto; 
+            
+            /* Style for the number itself (ensures text scales nicely) */
+            color: white; 
+            font-weight: 700;
+            font-size: 1.8rem; 
+            /* -------------------------------------- */
+        }
+        
+        /* CALCULATOR SECTION STYLING */
+        #calculator-section {
+            text-align: center; 
+        }
+
+        #calculator-section h3 {
+            text-align: center;
+        }
+
+        .calculator-panel {
+            border-radius: 20px;
+            box-shadow: var(--shadow-premium);
+            padding: 30px; 
+            max-width: 700px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            background-color: #fff9f0; /* Very light orange/cream */
+            border: 2px solid var(--color-secondary-finance);
+            text-align: left; 
+        }
+        
+        /* Animated Label/Placeholder styles */
+        .form-group {
+            position: relative; 
+            margin-bottom: 10px; 
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            color: var(--color-text);
+            
+            /* Label slide initial state */
+            position: absolute;
+            left: 0;
+            top: 10px; 
+            transition: all 0.2s ease-out;
+            pointer-events: none; 
+            padding-left: 12px; 
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px; 
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 1rem;
+            
+            position: relative; 
+            background-color: white;
+        }
+        
+        /* FIX FOR DOUBLE TEXT: Increase padding when a value is selected to push text down */
+        .form-group select.has-selection {
+            padding-top: 15px; 
+            padding-bottom: 5px; 
+        }
+
+        /* ORANGE LABEL SLIDE ANIMATION ON FOCUS/CONTENT */
+        .form-group input:focus + label,
+        .form-group select:focus + label,
+        .form-group select.has-selection + label, 
+        .form-group input:not(:placeholder-shown) + label {
+            top: -8px; 
+            font-size: 0.75rem; 
+            padding-left: 0;
+            color: var(--color-secondary-finance); 
+            background-color: #fff9f0; /* Match background for seamless look on floating label */
+            padding: 0 5px;
+            left: 7px;
+        }
+        
+        /* ORANGE ANIMATION FOR INPUT FOCUS (GLOW) */
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--color-secondary-finance); 
+            box-shadow: 0 0 0 4px rgba(229, 154, 0, 0.2); 
+            outline: none;
+        }
+
+        /* PREMIUM PLACEHOLDERS */
+        .form-group input::placeholder {
+            color: var(--color-placeholder);
+            font-style: italic;
+            opacity: 1; 
+        }
+
+        /* DROPDOWN CUSTOM STYLING */
+        .form-group select {
+            cursor: pointer;
+            -webkit-appearance: none; 
+            -moz-appearance: none;
+            appearance: none;
+            /* Custom arrow color */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%231a295c' d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 15px;
+        }
+        
+        /* ORANGE HOVER EFFECT ON DROPDOWN BORDER */
+        .form-group select:hover {
+            border-color: var(--color-secondary-finance);
+        }
+        
+        .form-group select:focus option[value=""] {
+            display: none;
+        }
+
+        .form-group.half-width {
+            width: calc(50% - 5px); 
+            display: inline-block;
+        }
+
+        .form-group.half-width:nth-child(even) {
+            margin-right: 10px; 
+        }
+
+        /* RESULTS BOX */
+        .results-box {
+            margin-top: 40px;
+            padding: 30px;
+            border: 2px solid var(--color-primary-health); 
+            border-radius: var(--border-radius);
+            background-color: #f9fbfd; 
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative; 
+        }
+
+        @keyframes fadeInSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-box.animate {
+            animation: fadeInSlide 0.6s ease-out forwards;
+        }
+
+        .results-box h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-primary-health);
+            font-size: 1.5rem;
+        }
+        
+        /* NEW STYLES: Center the single button in the button-group */
+        .button-group {
+            display: flex;
+            justify-content: center; /* This centers the content */
+            margin-top: 20px;
+        }
+
+        /* FEATURED BLOG */
+        #featured-blog h3 {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: var(--color-text);
+            margin-bottom: 20px; 
+        }
+
+        .blog-list {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .blog-card {
+            background-color: var(--color-background);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        .blog-card h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-primary-health);
+            margin-top: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #2c3e50; 
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-secondary-finance);
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            #hero {
+                padding: 40px 20px; 
+            }
+            .hero-content h2 {
+                font-size: 2.5rem;
+            }
+            .calculator-panel {
+                padding: 30px;
+                max-width: 90%; 
+            }
+            header .container {
+                flex-direction: column;
+            }
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+            .steps, .blog-list {
+                flex-direction: column;
+            }
+            .form-group.half-width {
+                width: 100%;
+                margin-right: 0;
+            }
+            .form-group.half-width:nth-child(even) {
+                margin-right: 0;
+            }
+            footer .container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>BudgetFit</h1>
+            </div>
+            <nav>
+                <a href="#calculator-section" class="cta-link">Calculator</a>
+                <a href="#">Blog</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section id="hero" class="container">
+            <div class="hero-content">
+                <h2>Calculate Your Daily Calories & Meal Budget</h2>
+                <p>Combine your health and finance goals with our unique, data-driven macro calculator.</p>
+                <a href="#calculator-section" class="button primary">Start Calculating Now</a>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="container">
+            <h3>How It Works</h3>
+            <div class="steps">
+                <div class="step-card">
+                    <span class="icon">1</span>
+                    <h4>Enter Info</h4>
+                    <p>Tell us your age, weight, and goals.</p>
+                </div>
+                <div class="step-card">
+                    <span class="icon">2</span>
+                    <h4>Set Budget</h4>
+                    <p>Input your preferred diet and daily budget.</p>
+                </div>
+                <div class="step-card">
+                    <span class="icon">3</span>
+                    <h4>Get Results</h4>
+                    <p>Receive custom macros, meals, and costs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="calculator-section" class="container">
+            <h3>Daily Requirements Calculator</h3>
+            <div class="calculator-panel">
+                <form id="calorie-macro-form">
+                    
+                    <div class="form-group">
+                        <input type="number" id="age" required placeholder=" ">
+                        <label for="age">Age (years)</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="gender" required>
+                            <option value="" disabled selected></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <label for="gender">Gender</label>
+                    </div>
+                    <div class="form-group half-width">
+                        <input type="number" id="weight" step="0.1" required placeholder=" ">
+                        <label for="weight">Weight (kg)</label>
+                    </div>
+                    <div class="form-group half-width">
+                        <input type="number" id="height" step="0.1" required placeholder=" ">
+                        <label for="height">Height (cm)</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="activity" required>
+                            <option value="" disabled selected></option>
+                            <option value="sedentary">Sedentary</option>
+                            <option value="light">Light (1-3 days/week)</option>
+                            <option value="moderate">Moderate (3-5 days/week)</option>
+                            <option value="active">Active (6-7 days/week)</option>
+                            <option value="very-active">Very Active (Twice a day)</option>
+                        </select>
+                        <label for="activity">Activity Level</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="goal" required>
+                            <option value="" disabled selected></option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="loss">Weight Loss</option>
+                            <option value="gain">Weight Gain</option>
+                        </select>
+                        <label for="goal">Fitness Goal</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select id="diet">
+                            <option value="" disabled selected></option>
+                            <option value="standard">Standard</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="keto">Keto</option>
+                            <option value="high-protein">High-Protein</option>
+                        </select>
+                        <label for="diet">Diet Preference</label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="number" id="budget" step="0.01" placeholder=" ">
+                        <label for="budget">Optional Daily Budget (₹)</label>
+                    </div>
+
+                    <button type="submit" class="button primary full-width">Calculate</button>
+                </form>
+                <div id="results-placeholder" class="results-box">
+                    <h4>Your Estimated Results</h4>
+                    <p>Enter your details above and click 'Calculate' to see your personalized plan.</p>
+                    <div class="button-group">
+                        <button id="download-pdf-button" class="button secondary">Download PDF Report</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="featured-blog" class="container">
+            <h3>Featured Articles</h3>
+            <div class="blog-list">
+                <div class="blog-card">
+                    <h4>Top 10 Cheap High-Protein Foods</h4>
+                    <p>Learn how to hit your macro goals without breaking the bank.</p>
+                </div>
+                <div class="blog-card">
+                    <h4>How to Track Macros for Weight Loss</h4>
+                    <p>A beginner's guide to macronutrient tracking.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BudgetFit. All rights reserved.</p>
+            <nav class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Social Links</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+    
+    // --- CALCULATOR LOGIC (Run on form submit) ---
+    document.getElementById('calorie-macro-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const age = parseInt(document.getElementById('age').value);
+        const gender = document.getElementById('gender').value;
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const activity = document.getElementById('activity').value;
+        const goal = document.getElementById('goal').value;
+        const budget = document.getElementById('budget').value;
+        
+        // 1. Calculate BMR (Mifflin-St Jeor)
+        let bmr;
+        if (gender === 'male') {
+            bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+        } else {
+            bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+        }
+
+        // 2. Adjust for Activity Level
+        let activityMultiplier;
+        switch (activity) {
+            case 'sedentary': activityMultiplier = 1.2; break; 
+            case 'light': activityMultiplier = 1.375; break; 
+            case 'moderate': activityMultiplier = 1.55; break; 
+            case 'active': activityMultiplier = 1.725; break; 
+            case 'very-active': activityMultiplier = 1.9; break;
+            default: activityMultiplier = 1.55;
+        }
+
+        let tdee = bmr * activityMultiplier;
+
+        // 3. Adjust for Goal
+        let finalCalories = tdee; 
+        if (goal === 'loss') {
+            finalCalories -= 500;
+        } else if (goal === 'gain') {
+            finalCalories += 500;
+        }
+        finalCalories = Math.round(finalCalories);
+
+        // 4. Macronutrient Split
+        const proteinGrams = Math.round(finalCalories * 0.30 / 4); 
+        const carbsGrams = Math.round(finalCalories * 0.45 / 4); 
+        const fatsGrams = Math.round(finalCalories * 0.25 / 9); 
+
+        // 5. Meal Budget Estimation
+        const defaultINR = 100.00;
+        const estimatedDailyCost = budget ? parseFloat(budget).toFixed(2) : defaultINR.toFixed(2); 
+        const estimatedWeeklyCost = (estimatedDailyCost * 7).toFixed(2); 
+
+        // 6. Output Results
+        const resultsPlaceholder = document.getElementById('results-placeholder');
+        
+        resultsPlaceholder.classList.remove('animate'); 
+        
+        // UPDATED: Removed "Share on Social Media" button from innerHTML
+        resultsPlaceholder.innerHTML = `
+            <h4>Your Estimated Results</h4>
+            <p><strong>Daily Calories:</strong> ${finalCalories} kcal</p>
+            <p><strong>Macronutrients:</strong> Protein: ${proteinGrams}g, Carbs: ${carbsGrams}g, Fats: ${fatsGrams}g</p>
+            <p><strong>Suggested Meals:</strong> (Meal planning requires a backend database for ${document.getElementById('diet').value} diet)</p>
+            <p><strong>Estimated Daily Cost:</strong> ₹${estimatedDailyCost} | <strong>Estimated Weekly Cost:</strong> ₹${estimatedWeeklyCost}</p>
+            <div class="button-group">
+                <button id="download-pdf-button" class="button secondary">Download PDF Report</button>
+            </div>
+        `;
+        
+        setTimeout(() => {
+            resultsPlaceholder.classList.add('animate');
+        }, 10); 
+
+        // Scroll smoothly to the results box
+        resultsPlaceholder.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // --- DROPDOWN PLACEHOLDER BEHAVIOR ---
+    document.querySelectorAll('select').forEach(select => {
+        const updateClass = () => {
+            if (select.value !== "") {
+                select.classList.add('has-selection');
+            } else {
+                select.classList.remove('has-selection');
+            }
+        };
+        select.addEventListener('change', updateClass);
+        updateClass(); 
+    });
+
+
+    // --- PDF DOWNLOAD FUNCTIONALITY ---
+    document.addEventListener('click', function(e) {
+        
+        const input = document.getElementById('results-placeholder');
+        
+        if (e.target && e.target.id === 'download-pdf-button') {
+            e.preventDefault();
+            
+            // PDF Logic (using html2canvas and jspdf)
+            html2canvas(input, {
+                scale: 2, 
+                useCORS: true 
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4'); 
+                
+                const imgWidth = 190; 
+                const pageHeight = 295;
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 10;
+                
+                pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight + 10;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save("BudgetFit_Report.pdf");
+            });
+
+        }
+    });
+
+    </script>
+</body>
+</html>
