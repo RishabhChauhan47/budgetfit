@@ -419,7 +419,7 @@
 
         .contact-item {
             background-color: var(--color-background);
-            padding: 20px 30px;
+            padding: 20px 30px; /* Default size */
             border-radius: var(--border-radius);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             text-align: left;
@@ -430,6 +430,10 @@
             color: var(--color-secondary-finance);
             margin-top: 0;
             font-size: 1.2rem;
+        }
+
+        .contact-item p {
+            margin: 5px 0; /* Tighten up spacing between lines in contact box */
         }
 
 
@@ -511,6 +515,34 @@
             footer .container {
                 flex-direction: column;
                 gap: 10px;
+            }
+
+            /* ABOUT US BOX PADDING */
+            #about-us {
+                padding: 40px 20px;
+            }
+            
+            /* ADJUST CONTACT BOXES FOR MOBILE */
+            .contact-details {
+                gap: 15px; /* Reduced gap between stacked items */
+                padding: 0 10px; /* Ensure detail container itself has padding */
+            }
+
+            .contact-item {
+                /* Reduce vertical padding further */
+                padding: 12px 20px; 
+                max-height: 120px;
+                margin: 0; /* Use parent gap for spacing */
+            }
+            
+            .contact-item h4 {
+                font-size: 1.1rem; /* Slightly smaller heading */
+                margin-bottom: 3px;
+            }
+
+            .contact-item p {
+                font-size: 0.9rem; /* Smaller text for compact look */
+                margin: 3px 0; /* Reduce space between paragraphs/lines dramatically */
             }
         }
     </style>
@@ -845,7 +877,6 @@
             
             // PDF Logic (using html2canvas and jspdf)
             html2canvas(input, {
-                // FIX: Increased scale from 2 to 3 for higher resolution/sharper text in the PDF
                 scale: 3, 
                 useCORS: true 
             }).then(canvas => {
