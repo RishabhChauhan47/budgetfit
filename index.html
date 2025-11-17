@@ -135,8 +135,8 @@
             margin-right: auto;
         }
 
-        /* HOW IT WORKS SECTION */
-        #how-it-works h3 {
+        /* SECTION HEADINGS */
+        #how-it-works h3, #about-us h3, #calculator-section h3, #featured-blog h3 {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             color: var(--color-primary-health);
@@ -145,6 +145,7 @@
             font-weight: 700;
         }
 
+        /* HOW IT WORKS SECTION */
         .steps {
             display: flex;
             justify-content: space-around;
@@ -172,8 +173,8 @@
             
             /* Create the circular shape */
             border-radius: 50%;
-            height: 45px;  
-            width: 45px;   
+            height: 60px;  
+            width: 60px;   
             display: flex; 
             justify-content: center;
             align-items: center;
@@ -186,20 +187,62 @@
             /* -------------------------------------- */
         }
         
+        /* ABOUT US SECTION STYLES (REDUCED PADDING) */
+        #about-us {
+            padding: 40px 0; /* Reduced vertical padding */
+            background-color: var(--color-background);
+            border-radius: var(--border-radius);
+            margin-top: 30px; /* Reduced margin */
+            margin-bottom: 30px; /* Reduced margin */
+            box-shadow: var(--shadow-premium);
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.0rem; /* Slightly smaller font for tighter content */
+            margin-bottom: 15px; /* Reduced space between paragraphs */
+            color: var(--color-text);
+        }
+
+        .value-props {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px; /* Reduced margin */
+            gap: 20px;
+        }
+
+        .prop-item {
+            flex: 1;
+            padding: 15px;
+            background-color: #f9fbfd;
+            border-radius: 8px;
+            border-left: 3px solid var(--color-secondary-finance);
+            text-align: left;
+        }
+
+        .prop-item h4 {
+            color: var(--color-primary-health);
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+
         /* CALCULATOR SECTION STYLING */
         #calculator-section {
             text-align: center; 
-        }
-
-        #calculator-section h3 {
-            text-align: center;
         }
 
         .calculator-panel {
             border-radius: 20px;
             box-shadow: var(--shadow-premium);
             padding: 30px; 
-            max-width: 700px; 
+            max-width: 600px; 
             margin-left: auto; 
             margin-right: auto; 
             background-color: #fff9f0; /* Very light orange/cream */
@@ -342,13 +385,53 @@
             margin-top: 20px;
         }
 
-        /* FEATURED BLOG */
+        /* FEATURED BLOG SECTION (HIDDEN VIA CSS) */
+        #featured-blog {
+            display: none; /* Hide the entire section now that links are gone */
+        }
         #featured-blog h3 {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             color: var(--color-text);
             margin-bottom: 20px; 
         }
+        
+        /* CONTACT SECTION STYLES */
+        #contact-section {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        #contact-section h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--color-primary-health);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            background-color: var(--color-background);
+            padding: 20px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            flex: 0 1 300px;
+        }
+
+        .contact-item h4 {
+            color: var(--color-secondary-finance);
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
 
         .blog-list {
             display: flex;
@@ -415,7 +498,7 @@
                 margin: 0 10px;
                 font-size: 0.9rem;
             }
-            .steps, .blog-list {
+            .steps, .blog-list, .contact-details, .value-props {
                 flex-direction: column;
             }
             .form-group.half-width {
@@ -441,9 +524,8 @@
             </div>
             <nav>
                 <a href="#calculator-section" class="cta-link">Calculator</a>
-                <a href="#">Blog</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
+                <a href="#about-us">About</a>
+                <a href="#contact-section">Contact</a>
             </nav>
         </div>
     </header>
@@ -478,7 +560,33 @@
                 </div>
             </div>
         </section>
-
+        
+        <section id="about-us" class="container">
+            <div class="about-content">
+                <h3>About BudgetFit</h3>
+                <p>
+                    BudgetFit was created to bridge the gap between **fitness goals** and **financial constraints**. We provide optimal nutrition planning that is accessible to everyone.
+                </p>
+                
+                <div class="value-props">
+                    <div class="prop-item">
+                        <h4>🎯 Precision Nutrition</h4>
+                        <p>Accurate daily calorie and macro targets using scientific formulas.</p>
+                    </div>
+                    <div class="prop-item">
+                        <h4>💰 Financial Clarity</h4>
+                        <p>Estimated daily and weekly food cost based on your budget (₹).</p>
+                    </div>
+                    <div class="prop-item">
+                        <h4>🔗 Health & Finance Combined</h4>
+                        <p>Holistic planning that optimizes both your well-being and your wallet.</p>
+                    </div>
+                </div>
+                <div class="button-group" style="margin-top: 40px;">
+                    <a href="#calculator-section" class="button primary">Go To Calculator</a>
+                </div>
+            </div>
+        </section>
         <section id="calculator-section" class="container">
             <h3>Daily Requirements Calculator</h3>
             <div class="calculator-panel">
@@ -543,15 +651,12 @@
                         <label for="budget">Optional Daily Budget (₹)</label>
                     </div>
 
-                    <button type="submit" class="button primary full-width">Calculate</button>
+                    <button type="submit" class="button primary">Calculate</button>
                 </form>
-                <div id="results-placeholder" class="results-box">
-                    <h4>Your Estimated Results</h4>
-                    <p>Enter your details above and click 'Calculate' to see your personalized plan.</p>
-                    <div class="button-group">
-                        <button id="download-pdf-button" class="button secondary">Download PDF Report</button>
+                
+                <div id="results-placeholder" class="results-box" style="opacity: 0; transform: translateY(20px);">
                     </div>
-                </div>
+                
             </div>
         </section>
 
@@ -568,6 +673,30 @@
                 </div>
             </div>
         </section>
+        
+        <section id="contact-section" class="container">
+            <h3>Contact BudgetFit</h3>
+            <p>We are here to help you achieve your fitness and financial goals. Reach out to us!</p>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <h4>Email Support</h4>
+                    <p>For general inquiries and technical support.</p>
+                    <p><strong>support@budgetfit.com</strong></p>
+                </div>
+                <div class="contact-item">
+                    <h4>Media & Partnerships</h4>
+                    <p>For press releases, marketing, and business queries.</p>
+                    <p><strong>partners@budgetfit.com</strong></p>
+                </div>
+                <div class="contact-item">
+                    <h4>Address</h4>
+                    <p>BudgetFit Labs (Pvt Ltd)</p>
+                    <p>123 Health Ave, Fitness City, 10001</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
@@ -576,7 +705,6 @@
             <nav class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms & Conditions</a>
-                <a href="#">Social Links</a>
             </nav>
         </div>
     </footer>
@@ -594,13 +722,16 @@
         const height = parseFloat(document.getElementById('height').value);
         const activity = document.getElementById('activity').value;
         const goal = document.getElementById('goal').value;
+        const diet = document.getElementById('diet').value || 'standard'; // Default to standard
         const budget = document.getElementById('budget').value;
         
         // 1. Calculate BMR (Mifflin-St Jeor)
         let bmr;
         if (gender === 'male') {
+            // BMR for Male: 10 * weight (kg) + 6.25 * height (cm) - 5 * age (years) + 5
             bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
         } else {
+            // BMR for Female: 10 * weight (kg) + 6.25 * height (cm) - 5 * age (years) - 161
             bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
         }
 
@@ -624,15 +755,45 @@
         } else if (goal === 'gain') {
             finalCalories += 500;
         }
-        finalCalories = Math.round(finalCalories);
+        // Ensure minimum safe calorie intake, round to nearest whole number
+        finalCalories = Math.max(1200, Math.round(finalCalories));
 
-        // 4. Macronutrient Split
-        const proteinGrams = Math.round(finalCalories * 0.30 / 4); 
-        const carbsGrams = Math.round(finalCalories * 0.45 / 4); 
-        const fatsGrams = Math.round(finalCalories * 0.25 / 9); 
+
+        // 4. Macronutrient Split (Customized based on Diet Preference)
+        let proteinPct, carbsPct, fatsPct, carbsLabel;
+        
+        switch (diet) {
+            case 'keto':
+                proteinPct = 0.25; // 25%
+                carbsPct = 0.05;   // 5% (Very Low Carb/Keto)
+                fatsPct = 0.70;    // 70% (High Fat)
+                carbsLabel = 'Net Carbs'; 
+                break;
+            case 'high-protein':
+                proteinPct = 0.40; // 40%
+                carbsPct = 0.35;   // 35%
+                fatsPct = 0.25;    // 25%
+                carbsLabel = 'Carbs';
+                break;
+            case 'standard':
+            case 'vegetarian':
+            case 'vegan':
+            default:
+                proteinPct = 0.30; // 30%
+                carbsPct = 0.45;   // 45%
+                fatsPct = 0.25;    // 25%
+                carbsLabel = 'Carbs';
+                break;
+        }
+
+        // Calculate grams (Protein/Carbs = 4 kcal/g, Fats = 9 kcal/g)
+        const proteinGrams = Math.round(finalCalories * proteinPct / 4); 
+        const carbsGrams = Math.round(finalCalories * carbsPct / 4); 
+        const fatsGrams = Math.round(finalCalories * fatsPct / 9); 
+
 
         // 5. Meal Budget Estimation
-        const defaultINR = 100.00;
+        const defaultINR = 150.00; // Adjusted default for better context
         const estimatedDailyCost = budget ? parseFloat(budget).toFixed(2) : defaultINR.toFixed(2); 
         const estimatedWeeklyCost = (estimatedDailyCost * 7).toFixed(2); 
 
@@ -641,12 +802,11 @@
         
         resultsPlaceholder.classList.remove('animate'); 
         
-        // UPDATED: Removed "Share on Social Media" button from innerHTML
         resultsPlaceholder.innerHTML = `
             <h4>Your Estimated Results</h4>
             <p><strong>Daily Calories:</strong> ${finalCalories} kcal</p>
-            <p><strong>Macronutrients:</strong> Protein: ${proteinGrams}g, Carbs: ${carbsGrams}g, Fats: ${fatsGrams}g</p>
-            <p><strong>Suggested Meals:</strong> (Meal planning requires a backend database for ${document.getElementById('diet').value} diet)</p>
+            <p><strong>Macronutrients:</strong> Protein: ${proteinGrams}g (${Math.round(proteinPct * 100)}%), ${carbsLabel}: ${carbsGrams}g (${Math.round(carbsPct * 100)}%), Fats: ${fatsGrams}g (${Math.round(fatsPct * 100)}%)</p>
+            <p><strong>Fitness Goal:</strong> ${goal.charAt(0).toUpperCase() + goal.slice(1)} | <strong>Diet:</strong> ${diet.charAt(0).toUpperCase() + diet.slice(1).replace('-', ' ')}</p>
             <p><strong>Estimated Daily Cost:</strong> ₹${estimatedDailyCost} | <strong>Estimated Weekly Cost:</strong> ₹${estimatedWeeklyCost}</p>
             <div class="button-group">
                 <button id="download-pdf-button" class="button secondary">Download PDF Report</button>
@@ -675,7 +835,7 @@
     });
 
 
-    // --- PDF DOWNLOAD FUNCTIONALITY ---
+    // --- PDF DOWNLOAD FUNCTIONALITY (using included libraries) ---
     document.addEventListener('click', function(e) {
         
         const input = document.getElementById('results-placeholder');
@@ -685,7 +845,8 @@
             
             // PDF Logic (using html2canvas and jspdf)
             html2canvas(input, {
-                scale: 2, 
+                // FIX: Increased scale from 2 to 3 for higher resolution/sharper text in the PDF
+                scale: 3, 
                 useCORS: true 
             }).then(canvas => {
                 const imgData = canvas.toDataURL('image/png');
